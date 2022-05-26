@@ -29,7 +29,7 @@ int SetGraph::VerticesCount() const {
 
 std::vector<int> SetGraph::GetNextVertices(int vertex) const {
     assert(vertex >= 0 && vertex < adjSet.size());
-    std::vector<int> nextVer;
+    std::vector<int> nextVer = {};
     for (auto iter = adjSet[vertex].begin(); iter != adjSet[vertex].end(); ++iter) {
         nextVer.push_back(*iter);
     }

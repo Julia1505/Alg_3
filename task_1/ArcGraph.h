@@ -14,4 +14,5 @@ public:
 
 private:
     std::vector<std::pair<int, int>> arPair;
+    int Vertices;
 };

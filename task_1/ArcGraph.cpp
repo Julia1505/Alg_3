@@ -3,14 +3,15 @@
 #include "ArcGraph.h"
 
 ArcGraph::ArcGraph(int count) {
-    arPair.resize(count);
+    Vertices = count;
 }
 
 ArcGraph::ArcGraph(const IGraph &graph) {
-    for (int i = 0; i < arPair.size(); ++i) {
+    Vertices = graph.VerticesCount();
+    for (int i = 1; i < graph.VerticesCount(); ++i) {
         std::vector<int> nextVer = graph.GetNextVertices(i);
         for (auto elem: nextVer) {
-            arPair.push_back(std::make_pair(i, elem));
+            arPair.emplace_back(i, elem);
         }
     }
 }
@@ -22,12 +23,12 @@ void ArcGraph::AddEdge(int from, int to) {
 }
 
 int ArcGraph::VerticesCount() const {
-    return arPair.size();
+    return Vertices;
 }
 
 std::vector<int> ArcGraph::GetNextVertices(int vertex) const {
     assert(vertex >= 0 && vertex < arPair.size());
-    std::vector<int> nextVer;
+    std::vector<int> nextVer = {};
     for (int i = 0; i < arPair.size(); ++i) {
         if (arPair[i].first == vertex) {
             nextVer.push_back(arPair[i].second);

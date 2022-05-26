@@ -9,8 +9,7 @@ MatrixGraph::MatrixGraph(int count) {
     }
 }
 
-MatrixGraph::MatrixGraph(const IGraph &graph) {
-    MatrixGraph(graph.VerticesCount());
+MatrixGraph::MatrixGraph(const IGraph &graph): MatrixGraph(graph.VerticesCount()) {
     for (int i = 0; i < adjMatrix.size(); ++i) {
         std::vector<int> nextVer = graph.GetNextVertices(i);
         for (auto elem : nextVer) {
@@ -31,7 +30,7 @@ int MatrixGraph::VerticesCount() const {
 
 std::vector<int> MatrixGraph::GetNextVertices(int vertex) const {
     assert(vertex >= 0 && vertex < adjMatrix.size());
-    std::vector<int> nextVer;
+    std::vector<int> nextVer = {};
     for (int i = 0; i < adjMatrix.size(); ++i) {
         if (adjMatrix[vertex][i] != 0) {
             nextVer.push_back(i);

@@ -33,8 +33,9 @@ std::vector<int> ListGraph::GetPrevVertices(int vertex) const {
     assert(vertex >= 0 && vertex < adjList.size());
     std::vector<int> prevVerticies;
     for (int from = 0; from < adjList.size(); ++from) {
-        for (int i = 0; i < adjList.size(); ++i) {
-            if (adjList[from][i] == vertex) {
+        std::vector<int> nextVer = GetNextVertices(from);
+        for (auto elem: nextVer) {
+            if (elem == vertex) {
                 prevVerticies.push_back(from);
             }
         }
